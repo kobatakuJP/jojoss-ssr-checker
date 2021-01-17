@@ -1,3 +1,13 @@
+export const COLORS = {
+    白: "#ffffcc",
+    黒: "#9242a0",
+    赤: "#db402c",
+    青: "#28a1d1",
+    緑: "#4e9b32",
+    金: "#dab300",
+    銀: "#aaaab5",
+}
+
 export const SSR_UNITS = [
     {id:"87e072cd7824a95ebffc2f8b34834759",name:"（SSR）ウィル・A・ツェペリ",color:"白",abi:"[スマッシュ]コンボブーストヒール",done:false},
     {id:"31e5c7ecc61f4b92fcbe7126c55f2178",name:"（SSR）ディオ・ブランドー",color:"黒",abi:"[コンボ]HPドレイン",done:false},
