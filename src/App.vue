@@ -3,12 +3,10 @@
     <h2 style="color: red">
       今は6部までの繋ぎ！今のうちに未所持SSRを一挙確認！
     </h2>
-    <h2>
-      所持済みSSRユニメット確認手帳ッ！！({{ haveNum }}/{{ totalNum }})
-    </h2>
+    <h2>所持済みSSRユニメット確認手帳ッ！！({{ haveNum }}/{{ totalNum }})</h2>
     <span style="font-weight: lighter; font-size: 0.6rem"></span>
     <ul>
-      <li v-for="unit in units" :key="unit.name">
+      <li v-for="unit in filteredUnits" :key="unit.name">
         <label>
           <input
             type="checkbox"
@@ -43,6 +41,7 @@ export default {
         銀: "#aaaab5",
       },
       units: SSR_UNITS,
+      dontHaveFilterFlag: false,
     };
   },
   computed: {
@@ -51,6 +50,9 @@ export default {
     },
     totalNum: function () {
       return this.units.length;
+    },
+    filteredUnits: function () {
+      return this.units.filter(this.dontHaveFilter);
     },
   },
   mounted: function () {
@@ -73,9 +75,12 @@ export default {
       const doneIDX = JSON.parse(window.localStorage.getItem("doneIDX"));
       doneIDX.forEach((v) => (this.units[v].done = true));
     },
+    /** 未所持フィルタ */
+    dontHaveFilter(v) {
+      return this.dontHaveFilterFlag ? !v.done : true;
+    },
   },
 };
-
 </script>
 
 <style>
@@ -95,7 +100,7 @@ body {
 
 li {
   margin: 8px 0;
-  list-style-type:none;
+  list-style-type: none;
 }
 
 h2 {
