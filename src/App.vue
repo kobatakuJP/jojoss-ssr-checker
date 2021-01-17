@@ -8,18 +8,18 @@
     </h2>
     <span style="font-weight: lighter; font-size: 0.6rem"></span>
     <ol>
-      <li v-for="todo in todos" :key="todo.name">
+      <li v-for="unit in units" :key="unit.name">
         <label>
           <input
             type="checkbox"
-            v-on:change="toggle(todo)"
-            v-bind:checked="todo.done"
+            v-on:change="toggle(unit)"
+            v-bind:checked="unit.done"
           />
-          <del v-if="todo.done" :style="{ color: colors[todo.color] }">
-            {{ todo.name }}／{{ todo.abi }}
+          <del v-if="unit.done" :style="{ color: colors[unit.color] }">
+            {{ unit.name }}／{{ unit.abi }}
           </del>
-          <span v-else :style="{ color: colors[todo.color] }">
-            {{ todo.name }}／{{ todo.abi }}
+          <span v-else :style="{ color: colors[unit.color] }">
+            {{ unit.name }}／{{ unit.abi }}
           </span>
         </label>
       </li>
@@ -42,15 +42,15 @@ export default {
         金: "#dab300",
         銀: "#aaaab5",
       },
-      todos: SSR_UNITS,
+      units: SSR_UNITS,
     };
   },
   computed: {
     haveNum: function () {
-      return this.todos.filter((v) => v.done).length;
+      return this.units.filter((v) => v.done).length;
     },
     totalNum: function () {
-      return this.todos.length;
+      return this.units.length;
     },
   },
   mounted: function () {
@@ -59,19 +59,19 @@ export default {
     });
   },
   methods: {
-    toggle: function (todo) {
-      todo.done = !todo.done;
+    toggle: function (unit) {
+      unit.done = !unit.done;
       this.updateDoneData();
     },
     updateDoneData: function () {
-      const idx = this.todos
+      const idx = this.units
         .map((v, i) => (v.done ? i : -1))
         .filter((v) => v > -1);
       window.localStorage.setItem("doneIDX", JSON.stringify(idx));
     },
     applyDoneData: function () {
       const doneIDX = JSON.parse(window.localStorage.getItem("doneIDX"));
-      doneIDX.forEach((v) => (this.todos[v].done = true));
+      doneIDX.forEach((v) => (this.units[v].done = true));
     },
   },
 };
