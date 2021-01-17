@@ -27,7 +27,7 @@
 
 <script>
 import { SSR_UNITS } from "./constants";
-const doneStorageKey = "doneIDs"
+const doneStorageKey = "doneIDs";
 export default {
   name: "App",
   data: function () {
@@ -70,12 +70,11 @@ export default {
       const idx = this.units
         .map((v) => (v.done ? v.id : ""))
         .filter((v) => v !== "");
-        console.log(idx)
       window.localStorage.setItem(doneStorageKey, JSON.stringify(idx));
     },
     applyDoneData: function () {
       const ids = JSON.parse(window.localStorage.getItem(doneStorageKey));
-      ids.forEach((v) => (this.units.find(u => { console.log(u,v);return u.id === v}).done = true));
+      ids.forEach((v) => (this.units.find((u) => u.id === v).done = true));
     },
     /** 未所持フィルタ */
     dontHaveFilter(v) {
