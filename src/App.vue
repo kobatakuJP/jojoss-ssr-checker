@@ -4,7 +4,7 @@
       今は6部までの繋ぎ！今のうちに未所持SSRを一挙確認！
     </h2>
     <h2>
-      所持済み期間限定ユニメット確認手帳ッ！！({{ haveNum }}/{{ totalNum }})
+      所持済みSSRユニメット確認手帳ッ！！({{ haveNum }}/{{ totalNum }})
     </h2>
     <span style="font-weight: lighter; font-size: 0.6rem"></span>
     <ol>
