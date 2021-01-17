@@ -7,7 +7,7 @@
       所持済みSSRユニメット確認手帳ッ！！({{ haveNum }}/{{ totalNum }})
     </h2>
     <span style="font-weight: lighter; font-size: 0.6rem"></span>
-    <ol>
+    <ul>
       <li v-for="unit in units" :key="unit.name">
         <label>
           <input
@@ -23,7 +23,7 @@
           </span>
         </label>
       </li>
-    </ol>
+    </ul>
   </div>
 </template>
 
@@ -82,7 +82,6 @@ export default {
 body {
   background: #20262e;
   color: white;
-  padding: 20px;
   font-family: Helvetica;
 }
 
@@ -96,6 +95,7 @@ body {
 
 li {
   margin: 8px 0;
+  list-style-type:none;
 }
 
 h2 {
