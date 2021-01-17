@@ -1,10 +1,30 @@
 <template>
   <div id="app">
+    <modal name="filter-modal" style="color: #20262e;">
+      <h3>フィルタッ！</h3>
+      <div>
+        <label>
+          <input type="checkbox" v-model="dontHaveFilterFlag" />
+          未所持のみ表示するッ！
+        </label>
+      </div>
+      <div>
+        <label
+          v-for="(s, color) in colors"
+          :key="color"
+          :style="{ backgroundColor: s }"
+        >
+          <input type="checkbox" :value="color" v-model="colorFilterFlags" />
+          {{ color }}
+        </label>
+      </div>
+    </modal>
     <h2 style="color: red">
       今は6部までの繋ぎ！今のうちに未所持SSRを一挙確認！
     </h2>
     <h2>所持済みSSRユニメット確認手帳ッ！！({{ haveNum }}/{{ totalNum }})</h2>
     <span style="font-weight: lighter; font-size: 0.6rem"></span>
+    <button @click="show">フィルタッ！</button>
     <ul>
       <li v-for="unit in filteredUnits" :key="unit.name">
         <label>
@@ -26,23 +46,16 @@
 </template>
 
 <script>
-import { SSR_UNITS } from "./constants";
+import { SSR_UNITS, COLORS } from "./constants";
 const doneStorageKey = "doneIDs";
 export default {
   name: "App",
   data: function () {
     return {
-      colors: {
-        白: "#ffffcc",
-        黒: "#9242a0",
-        赤: "#db402c",
-        青: "#28a1d1",
-        緑: "#4e9b32",
-        金: "#dab300",
-        銀: "#aaaab5",
-      },
+      colors: COLORS,
       units: SSR_UNITS,
       dontHaveFilterFlag: false,
+      colorFilterFlags: Object.keys(COLORS),
     };
   },
   computed: {
@@ -53,7 +66,7 @@ export default {
       return this.units.length;
     },
     filteredUnits: function () {
-      return this.units.filter(this.dontHaveFilter);
+      return this.units.filter(this.dontHaveFilter).filter(this.colorFilter);
     },
   },
   mounted: function () {
@@ -80,6 +93,12 @@ export default {
     dontHaveFilter(v) {
       return this.dontHaveFilterFlag ? !v.done : true;
     },
+    colorFilter(v) {
+      return this.colorFilterFlags.find((c) => c === v.color);
+    },
+    show() {
+      this.$modal.show("filter-modal");
+    },
   },
 };
 </script>
@@ -97,8 +116,12 @@ body {
   padding: 20px;
   transition: all 0.2s;
   font-weight: bold;
+  font-size: 14px;
 }
 
+ul {
+  padding: 0;
+}
 li {
   margin: 8px 0;
   list-style-type: none;
