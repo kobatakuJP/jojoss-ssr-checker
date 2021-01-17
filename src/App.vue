@@ -1,22 +1,33 @@
 <template>
   <div id="app">
-    <modal name="filter-modal" style="color: #20262e;">
-      <h3>フィルタッ！</h3>
-      <div>
-        <label>
-          <input type="checkbox" v-model="dontHaveFilterFlag" />
-          未所持のみ表示するッ！
-        </label>
-      </div>
-      <div>
-        <label
-          v-for="(s, color) in colors"
-          :key="color"
-          :style="{ backgroundColor: s }"
-        >
-          <input type="checkbox" :value="color" v-model="colorFilterFlags" />
-          {{ color }}
-        </label>
+    <modal
+      name="filter-modal"
+      style="color: #20262e"
+      :min-width="200"
+      :min-height="200"
+      :scrollable="true"
+      :reset="true"
+      width="60%"
+      height="auto"
+    >
+      <div style="margin: 15px;">
+        <h3>フィルタッ！</h3>
+        <div>
+          <label>
+            <input type="checkbox" v-model="dontHaveFilterFlag" />
+            未所持のみ表示するッ！
+          </label>
+        </div>
+        <div>
+          <label
+            v-for="(s, color) in colors"
+            :key="color"
+            :style="{ backgroundColor: s }"
+          >
+            <input type="checkbox" :value="color" v-model="colorFilterFlags" />
+            {{ color }}
+          </label>
+        </div>
       </div>
     </modal>
     <h2 style="color: red">
