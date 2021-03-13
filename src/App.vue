@@ -10,7 +10,7 @@
       width="60%"
       height="auto"
     >
-      <div style="margin: 15px;">
+      <div style="margin: 15px">
         <h3>フィルタッ！</h3>
         <div>
           <label>
@@ -28,16 +28,20 @@
             {{ color }}
           </label>
         </div>
+        <div>
+          <label v-for="(val, label) in types" :key="label">
+            <input type="checkbox" :value="val" v-model="typeFlags" />
+            {{ label }}
+          </label>
+        </div>
       </div>
     </modal>
     <div class="comp-rate">
-      <div>
-      コンプ率：{{parsented}}
-      </div>
+      <div>コンプ率：{{ parsented }}</div>
       ({{ haveNum }}/{{ totalNum }})
     </div>
     <h2 style="color: red">
-    今までありがとな！最後にみんなで終止符を打とうぜ！
+      今までありがとな！最後にみんなで終止符を打とうぜ！
     </h2>
     <h2>所持済みSSRユニメット確認手帳ッ！！</h2>
     <span style="font-weight: lighter; font-size: 0.6rem"></span>
@@ -63,16 +67,18 @@
 </template>
 
 <script>
-import { SSR_UNITS, COLORS } from "./constants";
+import { SSR_UNITS, COLORS, TYPES } from "./constants";
 const doneStorageKey = "doneIDs";
 export default {
   name: "App",
   data: function () {
     return {
       colors: COLORS,
+      types: TYPES,
       units: SSR_UNITS,
       dontHaveFilterFlag: false,
       colorFilterFlags: Object.keys(COLORS),
+      typeFlags: Object.values(TYPES),
     };
   },
   computed: {
@@ -82,12 +88,12 @@ export default {
     totalNum: function () {
       return this.units.length;
     },
-    parsented: function() {
-      const r = this.haveNum / this.totalNum * 100;
-      return Math.floor(r * Math.pow(10, 2)) / Math.pow(10,2) + "%"
+    parsented: function () {
+      const r = (this.haveNum / this.totalNum) * 100;
+      return Math.floor(r * Math.pow(10, 2)) / Math.pow(10, 2) + "%";
     },
     filteredUnits: function () {
-      return this.units.filter(this.dontHaveFilter).filter(this.colorFilter);
+      return this.units.filter(this.dontHaveFilter).filter(this.colorFilter).filter(this.typeFilter);
     },
   },
   mounted: function () {
@@ -115,7 +121,10 @@ export default {
       return this.dontHaveFilterFlag ? !v.done : true;
     },
     colorFilter(v) {
-      return this.colorFilterFlags.find((c) => c === v.color);
+      return this.colorFilterFlags.find((c) => c === v.color) !== undefined;
+    },
+    typeFilter(v) {
+      return this.typeFlags.find((t) => v.type_.includes(t)) !== undefined;
     },
     show() {
       this.$modal.show("filter-modal");
@@ -157,7 +166,7 @@ del {
   color: rgba(0, 0, 0, 0.3);
 }
 .comp-rate {
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   bottom: 20px;
   right: 20px;
