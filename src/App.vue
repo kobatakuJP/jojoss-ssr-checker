@@ -30,10 +30,16 @@
         </div>
       </div>
     </modal>
+    <div class="comp-rate">
+      <div>
+      コンプ率：{{parsented}}
+      </div>
+      ({{ haveNum }}/{{ totalNum }})
+    </div>
     <h2 style="color: red">
-      今は6部までの繋ぎ！今のうちに未所持SSRを一挙確認！
+    今までありがとな！最後にみんなで終止符を打とうぜ！
     </h2>
-    <h2>所持済みSSRユニメット確認手帳ッ！！({{ haveNum }}/{{ totalNum }})</h2>
+    <h2>所持済みSSRユニメット確認手帳ッ！！</h2>
     <span style="font-weight: lighter; font-size: 0.6rem"></span>
     <button @click="show">フィルタッ！</button>
     <ul>
@@ -75,6 +81,10 @@ export default {
     },
     totalNum: function () {
       return this.units.length;
+    },
+    parsented: function() {
+      const r = this.haveNum / this.totalNum * 100;
+      return Math.floor(r * Math.pow(10, 2)) / Math.pow(10,2) + "%"
     },
     filteredUnits: function () {
       return this.units.filter(this.dontHaveFilter).filter(this.colorFilter);
@@ -145,6 +155,14 @@ h2 {
 
 del {
   color: rgba(0, 0, 0, 0.3);
+}
+.comp-rate {
+  background-color: rgba(0,0,0,0.7);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  text-align: right;
+  padding: 3px;
 }
 </style>
 
