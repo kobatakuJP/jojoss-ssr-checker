@@ -586,5 +586,6 @@ export const SSR_UNITS = [
     {id:"cbedb2a0234b8891eb9d2f44ba8ee74c",name:"（SSR）花京院典明（カスタム）",color:"緑",abi:"[ｱｲﾃﾑ]拾った者にこの金貨をやるぞッ！",done:false},
     {id:"33f9246f4bf0d0bc6b6d5eeedf3ddf3f",name:"（SSR）DIO【黒】（楽しみだ…だんだん長く時間を止めるのはな…）",color:"黒",abi:"[特殊]これできさまは死んだ！",done:false},
     {id:"e30aa2b3b87bdcb4d63fceb862a6d78b",name:"（SSR）ポルナレフ＆アヴドゥル【銀】（銀の戦車＆赤の魔術師）",color:"銀",abi:"[特殊]メガファイアボム",done:false},
-    {id:"6b9fcec603a92ce7c2022fd45f33978d",name:"（SSR）花京院＆ジョセフ（隠者の紫＆エメラルド・スプラッシュ）",color:"緑",abi:"[ｽﾃｰﾀｽ]「魂」を！賭けよう！",done:false}
+    {id:"6b9fcec603a92ce7c2022fd45f33978d",name:"（SSR）花京院＆ジョセフ（隠者の紫＆エメラルド・スプラッシュ）",color:"緑",abi:"[ｽﾃｰﾀｽ]「魂」を！賭けよう！",done:false},
+    {id:"9f0c09b2e9fc34422c84ed61b42cd1fd",name:"（SSR）空条承太郎【金】（終止符を打つ者）",color:"金",abi:"[特殊]終止符を打つ者",done:false}
 ]
